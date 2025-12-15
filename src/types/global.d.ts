@@ -5,3 +5,5 @@ declare module "*.css" {
   export default content;
 
 }
+
+type TOption = { value: string; label: string; disable?: boolean };
