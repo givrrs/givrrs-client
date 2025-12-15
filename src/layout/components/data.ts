@@ -1,16 +1,16 @@
 export const menuItems = [
   {
     text: 'Features',
-    path: '#'
+    path: '#features'
   },
 
   {
     text: 'How it works',
-    path: '#'
+    path: '#how-it-works'
   },
 
   {
-    text: 'Features',
-    path: '#'
+    text: 'For who',
+    path: '#for-who'
   }
 ];

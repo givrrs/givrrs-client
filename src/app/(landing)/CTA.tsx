@@ -4,8 +4,8 @@ import { ArrowUpRight } from 'lucide-react';
 
 const CTA = () => {
   return (
-    <section className="bg-gradient-to-b from-green-600 to-green-950 py-20">
-      <div className="layout-content-container mx-auto flex max-w-[960px] flex-col">
+    <section className="bg-neutral-950 py-20">
+      <div className="mx-auto flex max-w-[960px] flex-col">
         <div className="">
           <div className="relative z-10 flex flex-col items-center gap-6">
             <div className="flex flex-col gap-2 text-center">
@@ -15,7 +15,7 @@ const CTA = () => {
               </SubHeading>
             </div>
 
-            <Button size="lg" variant="secondary">
+            <Button size="lg">
               Join the Waitlist
               <ArrowUpRight className="size-6" />
             </Button>
