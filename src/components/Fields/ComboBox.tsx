@@ -52,7 +52,7 @@ const InputCombo = forwardRef<HTMLInputElement, IInputComboProps>(
               <button
                 role="combobox"
                 aria-expanded={open}
-                className={`flex h-11 w-full items-center justify-between rounded-md bg-white px-2 font-grotesk text-sm font-normal ring-1 ring-borderLine hover:!bg-none ${!value && 'text-neutral-300'}`}
+                className={`font-grotesk ring-borderLine flex h-11 w-full items-center justify-between rounded-md bg-white px-2 text-sm font-normal ring-1 hover:!bg-none ${!value && 'text-neutral-300'}`}
               >
                 {value ? data.find((datum) => datum.value === value)?.label : placeholder}
                 <ChevronDown size={16} className="text-neutral-200" />

@@ -7,8 +7,14 @@ import { enUS } from 'date-fns/locale';
 import type { Locale } from 'date-fns';
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Clock } from 'lucide-react';
-import * as React from 'react';
-import { useImperativeHandle, useRef } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState
+} from 'react';
 
 import {
   Select,
@@ -234,7 +240,7 @@ function Calendar({
   yearRange = 50,
   ...props
 }: DayPickerProps & { yearRange?: number; hidden?: Matcher; showTime?: boolean }) {
-  const MONTHS = React.useMemo(() => {
+  function MONTHS() {
     let locale: Pick<Locale, 'options' | 'localize' | 'formatLong'> = enUS;
     const { options, localize, formatLong } = props.locale || {};
     if (options && localize && formatLong) {
@@ -245,9 +251,9 @@ function Calendar({
       };
     }
     return genMonths(locale);
-  }, []);
+  }
 
-  const YEARS = React.useMemo(() => genYears(yearRange), []);
+  const YEARS = useMemo(() => genYears(yearRange), [yearRange]);
   const disableLeftNavigation = () => {
     const today = new Date();
     const startDate = new Date(today.getFullYear() - yearRange, 0, 1);
@@ -329,11 +335,11 @@ function Calendar({
                   props.onMonthChange?.(newDate);
                 }}
               >
-                <SelectTrigger className="w-fit gap-1 border-none p-0 focus:bg-accent focus:text-accent-foreground">
+                <SelectTrigger className="focus:bg-accent focus:text-accent-foreground w-fit gap-1 border-none p-0">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {MONTHS.map((month) => (
+                  {MONTHS().map((month) => (
                     <SelectItem key={month.value} value={month.value.toString()}>
                       {month.label}
                     </SelectItem>
@@ -348,7 +354,7 @@ function Calendar({
                   props.onMonthChange?.(newDate);
                 }}
               >
-                <SelectTrigger className="w-fit gap-1 border-none p-0 focus:bg-accent focus:text-accent-foreground">
+                <SelectTrigger className="focus:bg-accent focus:text-accent-foreground w-fit gap-1 border-none p-0">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -379,7 +385,7 @@ interface PeriodSelectorProps {
   onLeftFocus?: () => void;
 }
 
-const TimePeriodSelect = React.forwardRef<HTMLButtonElement, PeriodSelectorProps>(
+const TimePeriodSelect = forwardRef<HTMLButtonElement, PeriodSelectorProps>(
   ({ period, setPeriod, date, onDateChange, onLeftFocus, onRightFocus }, ref) => {
     const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
       if (e.key === 'ArrowRight') onRightFocus?.();
@@ -407,7 +413,7 @@ const TimePeriodSelect = React.forwardRef<HTMLButtonElement, PeriodSelectorProps
         <Select defaultValue={period} onValueChange={(value: Period) => handleValueChange(value)}>
           <SelectTrigger
             ref={ref}
-            className="w-[65px] focus:bg-accent focus:text-accent-foreground"
+            className="focus:bg-accent focus:text-accent-foreground w-[65px]"
             onKeyDown={handleKeyDown}
           >
             <SelectValue />
@@ -433,7 +439,7 @@ interface TimePickerInputProps extends React.InputHTMLAttributes<HTMLInputElemen
   onLeftFocus?: () => void;
 }
 
-const TimePickerInput = React.forwardRef<HTMLInputElement, TimePickerInputProps>(
+const TimePickerInput = forwardRef<HTMLInputElement, TimePickerInputProps>(
   (
     {
       className,
@@ -453,14 +459,14 @@ const TimePickerInput = React.forwardRef<HTMLInputElement, TimePickerInputProps>
     },
     ref
   ) => {
-    const [flag, setFlag] = React.useState<boolean>(false);
-    const [prevIntKey, setPrevIntKey] = React.useState<string>('0');
+    const [flag, setFlag] = useState<boolean>(false);
+    const [prevIntKey, setPrevIntKey] = useState<string>('0');
 
     /**
      * allow the user to enter the second digit within 2 seconds
      * otherwise start again with entering first digit
      */
-    React.useEffect(() => {
+    useEffect(() => {
       if (flag) {
         const timer = setTimeout(() => {
           setFlag(false);
@@ -470,7 +476,7 @@ const TimePickerInput = React.forwardRef<HTMLInputElement, TimePickerInputProps>
       }
     }, [flag]);
 
-    const calculatedValue = React.useMemo(() => {
+    const calculatedValue = useMemo(() => {
       return getDateByType(date, picker);
     }, [date, picker]);
 
@@ -515,7 +521,7 @@ const TimePickerInput = React.forwardRef<HTMLInputElement, TimePickerInputProps>
         id={id || picker}
         name={name || picker}
         className={cn(
-          'w-[48px] text-center font-mono text-base tabular-nums caret-transparent focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none',
+          'focus:bg-accent focus:text-accent-foreground w-[48px] text-center font-mono text-base tabular-nums caret-transparent [&::-webkit-inner-spin-button]:appearance-none',
           className
         )}
         value={value || calculatedValue}
@@ -825,7 +831,7 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
             {...props}
           />
           {granularity !== 'day' && (
-            <div className="border-t border-border p-3">
+            <div className="border-border border-t p-3">
               <TimePicker
                 onChange={(value) => {
                   onChange?.(value);

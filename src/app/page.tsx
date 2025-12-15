@@ -1,8 +1,8 @@
-import CTA from "./(landing)/CTA";
-import Features from "./(landing)/Features";
-import ForWho from "./(landing)/ForWho";
-import Hero from "./(landing)/Hero";
-import HowItWorks from "./(landing)/HowItWorks";
+import CTA from './(landing)/CTA';
+import Features from './(landing)/Features';
+import ForWho from './(landing)/ForWho';
+import Hero from './(landing)/Hero';
+import HowItWorks from './(landing)/HowItWorks';
 
 export default function Home() {
   return (

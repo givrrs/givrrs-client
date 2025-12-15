@@ -25,7 +25,7 @@ const InsertLink = ({ handlerFn }: IInsertLink) => {
         <button
           type="button"
           onClick={() => {}}
-          className="toolbar-item spaced "
+          className="toolbar-item spaced"
           aria-label="Insert Link"
         >
           <LinkIcon size={16} />
@@ -33,7 +33,7 @@ const InsertLink = ({ handlerFn }: IInsertLink) => {
       </PopoverTrigger>
 
       <PopoverContent className="relative w-80 min-w-[300px] rounded-xl bg-white">
-        <div className="absolute left-0 top-0 flex w-full items-center justify-between border-b px-4 py-2">
+        <div className="absolute top-0 left-0 flex w-full items-center justify-between border-b px-4 py-2">
           <small className="font-grotesk font-medium">Add link</small>
           <PopoverClose>
             <div className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-neutral-50">
