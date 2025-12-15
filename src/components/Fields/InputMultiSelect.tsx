@@ -1,17 +1,14 @@
 import { FormControl, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import MultipleSelector, {
-  MultipleSelectorProps,
-  MultipleSelectorRef
-} from '@/components/ui/multi-select';
+import { MultiSelect, MultiSelectProps, MultiSelectRef } from '@/components/ui/multi-select';
 import { forwardRef } from 'react';
 
-interface IInputMultiSelectProps extends MultipleSelectorProps {
+interface IInputMultiSelectProps extends MultiSelectProps {
   label: string;
   isLoading: boolean;
   required?: boolean;
 }
 
-const InputMultiSelect = forwardRef<MultipleSelectorRef, IInputMultiSelectProps>(
+const InputMultiSelect = forwardRef<MultiSelectRef, IInputMultiSelectProps>(
   ({ label, required, ...props }, ref) => {
     return (
       <FormItem className="w-full">
@@ -20,11 +17,7 @@ const InputMultiSelect = forwardRef<MultipleSelectorRef, IInputMultiSelectProps>
           {required && <small className="text-error">*</small>}
         </FormLabel>
         <FormControl className="w-full">
-          <MultipleSelector
-            {...{ ref }}
-            {...props}
-            loadingIndicator={<p className="flex w-full items-center justify-center">loading</p>}
-          />
+          <MultiSelect {...{ ref }} {...props} />
         </FormControl>
         <FormMessage />
       </FormItem>

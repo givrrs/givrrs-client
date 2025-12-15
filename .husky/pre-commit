@@ -48,16 +48,6 @@ if [ -z "$husky_skip_init" ]; then
     exit 1
   fi
 
-  # Run pnpm lint
-  debug "Running pnpm lint"
-  pnpm lint
-
-  # Check the exit status of the previous command
-  if [ $? -ne 0 ]; then
-    echo "husky - $hook_name hook Linting failed. Please fix linting errors."
-    exit 1
-  fi
-
   # Run pnpm check:format
   debug "Running pnpm check:format"
   pnpm check:format

@@ -1,13 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const Logo = () => {
-  return (
-    <div
-      className='font-mono font-black text-lg'
-    >
-      givrrs
-    </div>
-  )
-}
+  return <div className="font-mono text-lg font-black">givrrs</div>;
+};
 
-export default Logo
+export default Logo;

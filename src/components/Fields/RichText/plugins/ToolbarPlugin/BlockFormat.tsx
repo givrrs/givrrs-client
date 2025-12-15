@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ShortCutFormat from './ShortCutFormat';
+import { JSX } from 'react';
 
 const rootTypeToRootName = {
   root: 'Root',

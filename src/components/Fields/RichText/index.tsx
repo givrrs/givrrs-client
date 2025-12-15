@@ -48,22 +48,22 @@ const RichTextField = forwardRef<HTMLDivElement, RichTextFieldProps>(
           <FormControl>
             <LexicalComposer initialConfig={editorConfig}>
               <ToolbarContext>
-                <div className="relative w-full  overflow-clip font-normal leading-5 text-black">
+                <div className="relative w-full overflow-clip leading-5 font-normal text-black">
                   <FormLabel className="flex items-center justify-start space-x-2 bg-neutral-100 p-4">
                     <p>{label}</p>
-                    {required && <small className="p-1 text-error">*</small>}
+                    {required && <small className="text-error p-1">*</small>}
                   </FormLabel>
-                  <div className="sticky left-0 top-0 z-10 w-full">
+                  <div className="sticky top-0 left-0 z-10 w-full">
                     <ToolbarPlugin />
                   </div>
                   <div className="relative w-full rounded-md p-2">
                     <RichTextPlugin
                       contentEditable={
                         <ContentEditable
-                          className="relative  min-h-40 w-full resize-none text-sm caret-black outline-none"
+                          className="relative min-h-40 w-full resize-none text-sm caret-black outline-none"
                           aria-placeholder={placeholder}
                           placeholder={
-                            <div className="pointer-events-none absolute left-2 top-2 select-none overflow-hidden text-xs text-typeGray">
+                            <div className="text-typeGray pointer-events-none absolute top-2 left-2 overflow-hidden text-xs select-none">
                               {placeholder}
                             </div>
                           }
@@ -96,7 +96,7 @@ const RichTextField = forwardRef<HTMLDivElement, RichTextFieldProps>(
           <FormDescription>
             {description}
             {maxLength && (
-              <p className="text-right text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-right text-sm">
                 {charCount}/{maxLength}
               </p>
             )}

@@ -108,7 +108,7 @@ const InputDateField = forwardRef<DateTimePickerRef, IInputDateFieldProps>(
             type="button"
             variant="ghost"
             className={cn(
-              'flex h-11 w-full items-center justify-start rounded-lg bg-white text-left font-grotesk font-normal shadow-none ring-1 ring-borderLine hover:bg-white',
+              'font-grotesk ring-borderLine flex h-11 w-full items-center justify-start rounded-lg bg-white text-left font-normal shadow-none ring-1 hover:bg-white',
               !props.value && 'text-neutral-300'
             )}
             onClick={() => setIsModalOpen(true)}

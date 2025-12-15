@@ -60,8 +60,8 @@ const InputComponent = React.forwardRef<HTMLInputElement, PatternFormatProps>(
       min={8}
       max={10}
       className={cn(
-        'flex h-12 w-full rounded-lg border border-input bg-transparent px-3 py-1 text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-neutral-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
-        'rounded-e-lg rounded-s-none',
+        'border-input file:text-foreground focus-visible:ring-ring flex h-12 w-full rounded-lg border bg-transparent px-3 py-1 text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-300 focus-visible:ring-1 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+        'rounded-s-none rounded-e-lg',
         className
       )}
       getInputRef={ref}
@@ -102,7 +102,7 @@ const CountrySelect = ({
         <Button
           type="button"
           variant="outline"
-          className="flex h-12 gap-1 rounded-e-none rounded-s-lg border-r-0 border-borderLine px-3 focus:z-10"
+          className="border-borderLine flex h-12 gap-1 rounded-s-lg rounded-e-none border-r-0 px-3 focus:z-10"
           disabled={disabled}
         >
           <FlagComponent country={selectedCountry} countryName={selectedCountry} />
@@ -177,7 +177,7 @@ const CountrySelectOption = ({
     <CommandItem className="gap-2" onSelect={handleSelect}>
       <FlagComponent country={country} countryName={countryName} />
       <span className="flex-1 text-sm">{countryName}</span>
-      <span className="text-sm text-foreground/50">{`+${RPNInput.getCountryCallingCode(country)}`}</span>
+      <span className="text-foreground/50 text-sm">{`+${RPNInput.getCountryCallingCode(country)}`}</span>
       <CheckIcon
         className={`ml-auto size-4 ${country === selectedCountry ? 'opacity-100' : 'opacity-0'}`}
       />
@@ -189,7 +189,7 @@ const FlagComponent = ({ country, countryName }: RPNInput.FlagProps) => {
   const Flag = flags[country];
 
   return (
-    <span className="flex h-4 w-6 overflow-hidden rounded-sm bg-foreground/20 [&_svg:not([class*='size-'])]:size-full">
+    <span className="bg-foreground/20 flex h-4 w-6 overflow-hidden rounded-sm [&_svg:not([class*='size-'])]:size-full">
       {Flag && <Flag title={countryName} />}
     </span>
   );
