@@ -6,9 +6,10 @@ import { SectionHeading, SubHeading } from './components/typographys';
 import { Button } from '@/components/ui/button';
 import { ArrowUpRight } from 'lucide-react';
 import { useEffect, useEffectEvent, useState } from 'react';
+import Link from 'next/link';
 
 const Hero = () => {
-  const textOptions = ['Fee-free', 'Instant', 'Global', 'Transparent'];
+  const textOptions = ['For all', 'Instant', 'Global', 'Transparent'];
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -35,10 +36,10 @@ const Hero = () => {
             className="translate-y-6 opacity-0 transition-all delay-300 duration-700 ease-out data-[loaded=true]:translate-y-0 data-[loaded=true]:opacity-100"
           >
             Fundraise without borders.
-            <div className="relative flex h-[60px] w-full overflow-hidden text-green-600 italic sm:h-[80px]">
+            <div className="relative flex h-15 w-full overflow-hidden text-green-600 italic sm:h-20">
               <ul className="flip4 w-full">
                 {textOptions.map((text) => (
-                  <li key={text} className="h-[100px] w-full">
+                  <li key={text} className="h-25 w-full">
                     {text}.
                   </li>
                 ))}
@@ -58,14 +59,18 @@ const Hero = () => {
           data-loaded={isLoaded}
           className="mx-auto flex w-full translate-y-6 flex-col gap-4 opacity-0 transition-all delay-700 duration-700 ease-out data-[loaded=true]:translate-y-0 data-[loaded=true]:opacity-100 md:max-w-fit md:flex-row"
         >
-          <Button size="lg" className="w-full md:w-auto">
-            Join waitlist
-            <ArrowUpRight className="size-6" />
-          </Button>
+          <Link href="#waitlist">
+            <Button size="lg" className="w-full md:w-auto">
+              Join waitlist
+              <ArrowUpRight className="size-6" />
+            </Button>
+          </Link>
 
-          <Button size="lg" variant="outline" className="w-full md:w-auto">
-            Learn more
-          </Button>
+          <Link href="#features">
+            <Button size="lg" variant="outline" className="w-full md:w-auto">
+              Learn more
+            </Button>
+          </Link>
         </div>
       </section>
 

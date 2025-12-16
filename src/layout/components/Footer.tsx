@@ -3,8 +3,8 @@ import Logo from './Logo';
 
 const Footer = () => {
   return (
-    <footer className="border-t border-gray-200 bg-white px-6 py-10 md:px-10 lg:px-40 dark:border-gray-800 dark:bg-[#101922]">
-      <div className="layout-content-container mx-auto flex max-w-[960px] flex-col gap-8 text-center">
+    <footer className="border-t border-gray-200 bg-white px-6 py-10 md:px-10 lg:px-40 dark:border-gray-800">
+      <div className="layout-content-container mx-auto flex max-w-240 flex-col items-center justify-center gap-8 text-center">
         <Logo />
         <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
           <a
