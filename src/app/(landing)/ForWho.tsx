@@ -53,7 +53,7 @@ const ForWho = () => {
   }, []);
 
   return (
-    <Section ref={ref} id="for-who" className="bg-gray-50 py-20">
+    <Section ref={ref} id="for-who" className="bg-gray-50">
       <div ref={containerRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div data-inview={isInView} className="mb-16 text-center">
           <SectionHeading>Built for everyone</SectionHeading>

@@ -77,7 +77,7 @@ const Features = () => {
   }, []);
 
   return (
-    <Section ref={ref} id="features" className="bg-muted py-20">
+    <Section ref={ref} id="features" className="bg-muted">
       <div ref={containerRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div data-inview={isInView} className="mb-16 text-center">
           <SectionHeading>What can givrrs do?</SectionHeading>
