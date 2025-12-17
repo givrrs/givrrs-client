@@ -13,9 +13,9 @@ const CTA = () => {
           </SubHeading>
         </div>
 
-        {/* <div className='w-full mx-auto max-w-xl'>
+        <div className="mx-auto w-full max-w-xl">
           <WailtlistForm />
-        </div> */}
+        </div>
       </div>
     </section>
   );
