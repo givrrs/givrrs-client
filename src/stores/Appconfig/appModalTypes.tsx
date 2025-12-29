@@ -1,7 +1,8 @@
 export enum AppModals {
   DONE = 'DONE',
   LOG_OUT_MODAL = 'LOG_OUT_MODAL',
-  WAITLIST_SUCCESS = 'WAITLIST_SUCCESS'
+  WAITLIST_SUCCESS = 'WAITLIST_SUCCESS',
+  FORGOT_PWD_MODAL = 'FORGOT_PWD_MODAL'
 }
 
 export type TAppModalsAction =
@@ -11,7 +12,7 @@ export type TAppModalsAction =
       open?: boolean;
     }
   | ({
-      name: AppModals.LOG_OUT_MODAL | AppModals.WAITLIST_SUCCESS;
+      name: AppModals.LOG_OUT_MODAL | AppModals.WAITLIST_SUCCESS | AppModals.FORGOT_PWD_MODAL;
     } & {
       open: boolean;
     })
