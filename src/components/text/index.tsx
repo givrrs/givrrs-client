@@ -5,7 +5,7 @@ interface ITypographyProps<T> extends HTMLAttributes<T> {}
 export const Title = ({ className, children, ...rest }: ITypographyProps<HTMLHeadingElement>) => {
   return (
     <h2
-      className={`font-grotesk mb-2 scroll-m-20 text-2xl font-medium tracking-tight lg:text-4xl ${className}`}
+      className={`mb-2 scroll-m-20 text-2xl font-medium tracking-tight lg:text-4xl ${className}`}
       {...rest}
     >
       {children}
@@ -19,7 +19,7 @@ export const SubTitle = ({
   ...rest
 }: ITypographyProps<HTMLHeadingElement>) => {
   return (
-    <h3 className={`font-grotesk mb-2 text-lg font-medium md:text-xl ${className}`} {...rest}>
+    <h3 className={`mb-2 text-lg font-medium md:text-xl ${className}`} {...rest}>
       {children}
     </h3>
   );
@@ -31,7 +31,7 @@ export const Paragraph = ({
   ...rest
 }: ITypographyProps<HTMLParagraphElement>) => {
   return (
-    <p className={`font-grotesk text-xs font-thin md:text-sm ${className}`} {...rest}>
+    <p className={`text-xs md:text-sm ${className}`} {...rest}>
       {children}
     </p>
   );

@@ -28,9 +28,10 @@ const InputSelect = forwardRef<HTMLInputElement, ISelectFormProps>(
     return (
       <FormItem className="w-full">
         {label && (
-          <FormLabel className="flex items-center justify-start space-x-1">
-            <p>{label}</p>
-            {props.required && <small className="text-error">*</small>}
+          <FormLabel className="flex items-center justify-start">
+            <p>
+              {label} {props.required && <small className="text-red-600">*</small>}
+            </p>
           </FormLabel>
         )}
         <Select {...{ ref }} {...props}>
