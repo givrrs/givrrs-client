@@ -19,19 +19,23 @@ import { PatternFormat, PatternFormatProps } from 'react-number-format';
 
 export type PhoneInputProps = Omit<React.ComponentProps<'input'>, 'onChange' | 'value' | 'ref'> &
   Omit<RPNInput.Props<typeof RPNInput.default>, 'onChange'> & {
+    isLoading?: boolean;
+    filterStr?: RPNInput.Country | undefined;
     onChange?: (value: RPNInput.Value) => void;
   };
 
 const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> = React.forwardRef<
   React.ElementRef<typeof RPNInput.default>,
   PhoneInputProps
->(({ className, onChange, value, ...props }, ref) => {
+>(({ className, onChange, isLoading, filterStr, value, ...props }, ref) => {
   return (
     <RPNInput.default
       ref={ref}
       className={cn('flex', className)}
       flagComponent={FlagComponent}
-      countrySelectComponent={CountrySelect}
+      countrySelectComponent={(selectProps) => (
+        <CountrySelect {...selectProps} filterStr={filterStr} />
+      )}
       inputComponent={InputComponent}
       smartCaret={false}
       defaultCountry="NG"
@@ -60,8 +64,9 @@ const InputComponent = React.forwardRef<HTMLInputElement, PatternFormatProps>(
       min={8}
       max={10}
       className={cn(
-        'border-input file:text-foreground focus-visible:ring-ring flex h-12 w-full rounded-lg border bg-transparent px-3 py-1 text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-300 focus-visible:ring-1 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
-        'rounded-s-none rounded-e-lg',
+        'border-input placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 h-12 w-full min-w-0 rounded-r-md border px-3 text-base transition-[color,box-shadow] outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
+        'focus-visible:outline-none',
+        'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
         className
       )}
       getInputRef={ref}
@@ -77,13 +82,15 @@ type CountrySelectProps = {
   value: RPNInput.Country;
   options: CountryEntry[];
   onChange: (country: RPNInput.Country) => void;
+  filterStr?: RPNInput.Country;
 };
 
 const CountrySelect = ({
   disabled,
   value: selectedCountry,
   options: countryList,
-  onChange
+  onChange,
+  filterStr
 }: CountrySelectProps) => {
   const scrollAreaRef = React.useRef<HTMLDivElement>(null);
   const [searchValue, setSearchValue] = React.useState('');
@@ -111,7 +118,7 @@ const CountrySelect = ({
           />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[300px] p-0">
+      <PopoverContent className="w-75 p-0">
         <Command>
           <CommandInput
             value={searchValue}
@@ -134,18 +141,35 @@ const CountrySelect = ({
             <ScrollArea ref={scrollAreaRef} className="h-72">
               <CommandEmpty>No country found.</CommandEmpty>
               <CommandGroup>
-                {countryList.map(({ value, label }) =>
-                  value ? (
-                    <CountrySelectOption
-                      key={value}
-                      country={value}
-                      countryName={label}
-                      selectedCountry={selectedCountry}
-                      onChange={onChange}
-                      onSelectComplete={() => setIsOpen(false)}
-                    />
-                  ) : null
-                )}
+                {filterStr
+                  ? countryList
+                      .filter((e) => e.value === filterStr)
+                      .map(
+                        ({ value, label }) =>
+                          value && (
+                            <CountrySelectOption
+                              key={value}
+                              country={value}
+                              countryName={label}
+                              selectedCountry={selectedCountry}
+                              onChange={onChange}
+                              onSelectComplete={() => setIsOpen(false)}
+                            />
+                          )
+                      )
+                  : countryList.map(
+                      ({ value, label }) =>
+                        value && (
+                          <CountrySelectOption
+                            key={value}
+                            country={value}
+                            countryName={label}
+                            selectedCountry={selectedCountry}
+                            onChange={onChange}
+                            onSelectComplete={() => setIsOpen(false)}
+                          />
+                        )
+                    )}
               </CommandGroup>
             </ScrollArea>
           </CommandList>

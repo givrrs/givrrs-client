@@ -22,6 +22,10 @@ class AppConfigStore {
     showClose: true
   };
 
+  authModal = {
+    email: ''
+  };
+
   isOpen = { ...INIT_IS_OPEN };
 
   constructor(rootStore: RootStore) {

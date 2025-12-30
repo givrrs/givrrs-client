@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/layout/navbar/Navbar';
-import Footer from '@/layout/components/Footer';
+import ROUTES from '@/constants/routes';
+import AppProvider from './provider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'givrrs',
-  description: 'givrrs Home page'
+  title: ROUTES.HOME.title,
+  description: ROUTES.HOME.description
 };
 
 export default function RootLayout({
@@ -27,9 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Navbar />
-        {children}
-        <Footer />
+        <AppProvider>{children}</AppProvider>
       </body>
     </html>
   );

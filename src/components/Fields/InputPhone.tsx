@@ -7,24 +7,27 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form';
-import { PhoneInput } from '../ui/input-phonenumber';
+import { PhoneInput, PhoneInputProps } from '../ui/input-phonenumber';
 
-interface IInputProps {
+interface IInputProps extends PhoneInputProps {
   label: string;
   description?: ReactNode;
+  required?: boolean;
 }
 
 const InputPhoneField = forwardRef<HTMLInputElement, IInputProps>(
   ({ description, label, ...props }, ref) => {
     return (
       <FormItem className="w-full">
-        <FormLabel>{label}</FormLabel>
+        {label && (
+          <FormLabel className="flex items-center justify-start">
+            <p>
+              {label} {props.required && <small className="text-red-600">*</small>}
+            </p>
+          </FormLabel>
+        )}
         <FormControl className="w-full">
-          <PhoneInput
-            className="border-input placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border px-3 py-1 text-base transition-colors focus-visible:ring-1 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-            {...{ ref }}
-            {...props}
-          />
+          <PhoneInput {...{ ref }} {...props} />
         </FormControl>
         <FormDescription>{description}</FormDescription>
         <FormMessage />
