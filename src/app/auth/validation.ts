@@ -13,6 +13,7 @@ export const createAccountSchema = z
     email,
     phone_number,
     gender: z.string({ error: 'Gender is required.' }).toLowerCase().trim(),
+    interests: z.string().array(),
     password,
     confirm_password: password
   })
